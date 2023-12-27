@@ -1,6 +1,8 @@
 create extension hstore;
 create extension citext;
 
+create role postgres;
+
 create schema goodschema;
 create schema evenbetterschema;
 

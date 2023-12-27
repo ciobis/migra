@@ -1,5 +1,8 @@
 create extension pg_trgm;
 
+create role postgres;
+create role webuser;
+
 create schema goodschema;
 create schema badschema;
 
@@ -21,6 +24,8 @@ CREATE TABLE aunwanted (
     id serial primary key,
     name text not null
 );
+
+grant select, insert on table aunwanted to webuser;
 
 CREATE TABLE orders (
     order_id serial primary key,

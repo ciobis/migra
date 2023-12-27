@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import io
 from difflib import ndiff as difflib_diff
+from testcontainers.postgres import PostgresContainer
 
 import pytest
 
@@ -84,6 +85,7 @@ dependencies3
 dependencies4
 constraints
 generated
+roles
 """.split()
 
 
@@ -142,11 +144,13 @@ def do_fixture_test(
         flags += ["--with-privileges"]
     fixture_path = "tests/FIXTURES/{}/".format(fixture_name)
     EXPECTED = io.open(fixture_path + "expected.sql").read().strip()
-    with temporary_database(host="localhost") as d0, temporary_database(
-        host="localhost"
-    ) as d1:
+    with PostgresContainer("postgres:14.1") as db0, PostgresContainer("postgres:14.1") as db1:
+        d0 = db0.get_connection_url()
+        d1 = db1.get_connection_url()
         with S(d0) as s0:
             create_role(s0, schemainspect_test_role)
+        with S(d1) as s1:
+            create_role(s1, schemainspect_test_role)
         with S(d0) as s0, S(d1) as s1:
             load_sql_from_file(s0, fixture_path + "a.sql")
             load_sql_from_file(s1, fixture_path + "b.sql")

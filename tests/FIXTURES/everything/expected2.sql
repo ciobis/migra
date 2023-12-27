@@ -10,6 +10,10 @@ create sequence "public"."bug_id_seq";
 
 create sequence "public"."products_product_no_seq";
 
+revoke insert on table "public"."aunwanted" from "webuser";
+
+revoke select on table "public"."aunwanted" from "webuser";
+
 revoke select on table "public"."products" from "postgres";
 
 alter table "public"."products" drop constraint "products_name_key";
@@ -183,3 +187,5 @@ create or replace view "public"."vvv" as  SELECT 2 AS a;
 grant update on table "public"."products" to "postgres";
 
 drop schema if exists "badschema";
+
+drop role webuser;

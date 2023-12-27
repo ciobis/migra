@@ -1,5 +1,7 @@
 create extension citext;
 
+create role postgres;
+
 create schema goodschema;
     
 CREATE TYPE goodschema.sdfasdfasdf AS ENUM ('not shipped', 'shipped', 'delivered', 'not delivered');

@@ -14,7 +14,7 @@ python = ">=3.7,<4"
 sqlbag = "*"
 six = "*"
 # schemainspect = {path="../schemainspect", develop=true}
-schemainspect = ">=3.1.1663480743"
+# schemainspect = ">=3.1.1663480743"
 psycopg2-binary = { version="*", optional = true }
 
 [tool.poetry.dev-dependencies]
@@ -27,6 +27,7 @@ flake8 = "*"
 isort = "*"
 black = "*"
 toml = "*"
+testcontainers-postgres = "*"
 
 [tool.poetry.scripts]
 migra = 'migra:do_command'

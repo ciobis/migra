@@ -1,5 +1,7 @@
 create extension hstore;
 
+create role postgres;
+
 create schema goodschema;
 
 create table goodschema.t(id uuid, value text);

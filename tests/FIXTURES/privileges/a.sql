@@ -1,5 +1,7 @@
 create extension pg_trgm;
 
+create role postgres;
+
 create schema any_schema;
 
 CREATE TYPE any_enum AS ENUM ('value1', 'value2');
