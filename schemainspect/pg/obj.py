@@ -1122,6 +1122,9 @@ class InspectedRole(Inspected):
             ("'" + self.password + "'") if self.password else 'NULL',
             " valid until {}".format(self.valid_until) if self.valid_until else "",
         )
+    
+    def alter_statements(self, other=None):
+        return [self.update_statement]
 
     def __eq__(self, other):
         equalities = (

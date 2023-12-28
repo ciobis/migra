@@ -89,7 +89,7 @@ class Migration(object):
 
         self.add(self.changes.extensions(creations_only=True, modifications=False))
         self.add(self.changes.extensions(modifications_only=True, modifications=True))
-        self.add(self.changes.roles(creations_only=True, modifications=True))
+        self.add(self.changes.roles(creations_only=True, modifications=True, modifications_as_alters=True))
         self.add(self.changes.collations(creations_only=True))
         self.add(self.changes.enums(creations_only=True, modifications=False))
         self.add(self.changes.sequences(creations_only=True))
@@ -123,7 +123,7 @@ class Migration(object):
         self.add(self.changes.triggers(creations_only=True))
         self.add(self.changes.collations(drops_only=True))
         self.add(self.changes.schemas(drops_only=True))
-        self.add(self.changes.roles(drops_only=True))
+        self.add(self.changes.roles(drops_only=True, modifications=False))
 
     @property
     def sql(self):
