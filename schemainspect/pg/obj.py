@@ -1095,7 +1095,7 @@ class InspectedRole(Inspected):
 
     @property
     def create_statement(self):
-        return "create role {} with {}{}{}{}{}{}{} password {} {};".format(
+        return "create role {} with {} {} {} {} {} {} connection limit {} password {} {};".format(
             self.name,
             self.superuser,
             self.createdb,

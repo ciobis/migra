@@ -142,7 +142,7 @@ def do_fixture_test(
         flags += ["--ignore-extension-versions"]
     if with_privileges:
         flags += ["--with-privileges"]
-    fixture_path = "tests/FIXTURES/{}/".format(fixture_name)
+    fixture_path = "tests/migra/FIXTURES/{}/".format(fixture_name)
     EXPECTED = io.open(fixture_path + "expected.sql").read().strip()
     with PostgresContainer("postgres:14.1") as db0, PostgresContainer("postgres:14.1") as db1:
         d0 = db0.get_connection_url()
