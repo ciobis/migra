@@ -47,12 +47,20 @@ def outs():
 
 def test_singleschema():
     for FIXTURE_NAME in ["singleschema"]:
-        do_fixture_test(FIXTURE_NAME, schema="goodschema")
+        do_fixture_test(FIXTURE_NAME, schema=["goodschema"])
+
+def test_multichema():
+    for FIXTURE_NAME in ["multischema"]:
+        do_fixture_test(FIXTURE_NAME, schema=["goodschema", "goodschema2"])
 
 
 def test_excludeschema():
     for FIXTURE_NAME in ["excludeschema"]:
-        do_fixture_test(FIXTURE_NAME, exclude_schema="excludedschema")
+        do_fixture_test(FIXTURE_NAME, exclude_schema=["excludedschema"])
+
+def test_excludemultischema():
+    for FIXTURE_NAME in ["excludemultischema"]:
+        do_fixture_test(FIXTURE_NAME, exclude_schema=["excludedschema"])
 
 
 def test_singleschema_ext():
@@ -133,9 +141,9 @@ def do_fixture_test(
 ):
     flags = ["--unsafe"]
     if schema:
-        flags += ["--schema", schema]
+        flags += ["--schema"] + schema
     if exclude_schema:
-        flags += ["--exclude_schema", exclude_schema]
+        flags += ["--exclude_schema"] + exclude_schema
     if create_extensions_only:
         flags += ["--create-extensions-only"]
     if ignore_extension_versions:
@@ -167,7 +175,7 @@ def do_fixture_test(
 
         assert err.getvalue() == DESTRUCTIVE
 
-        args = parse_args(flags + [d0, d1])
+        args = parse_args([d0, d1] + flags)
         assert args.unsafe
         assert args.schema == schema
         out, err = outs()

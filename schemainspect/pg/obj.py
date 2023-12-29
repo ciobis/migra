@@ -1817,10 +1817,10 @@ class PostgreSQL(DBInspector):
             raise ValueError("Can only have schema or exclude schema, not both")
 
         def equal_to_schema(x):
-            return x.schema == schema
+            return x.schema in schema
 
         def not_equal_to_exclude_schema(x):
-            return x.schema != exclude_schema
+            return not (x.schema in exclude_schema)
 
         if schema:
             comparator = equal_to_schema
@@ -1890,7 +1890,7 @@ class PostgreSQL(DBInspector):
 
         return s.getvalue()
 
-    def one_schema(self, schema):
+    def include_schema(self, schema):
         self.filter_schema(schema=schema)
 
     def exclude_schema(self, schema):

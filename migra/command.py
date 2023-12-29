@@ -22,6 +22,10 @@ def arg_context(x):
 
 def parse_args(args):
     parser = argparse.ArgumentParser(description="Generate a database migration.")
+    parser.add_argument("dburl_from", help="The database you want to migrate.")
+    parser.add_argument(
+        "dburl_target", help="The database you want to use as the target."
+    )
     parser.add_argument(
         "--unsafe",
         dest="unsafe",
@@ -31,12 +35,14 @@ def parse_args(args):
     parser.add_argument(
         "--schema",
         dest="schema",
+        nargs='*',
         default=None,
         help="Restrict output to statements for a particular schema",
     )
     parser.add_argument(
         "--exclude_schema",
         dest="exclude_schema",
+        nargs='*',
         default=None,
         help="Restrict output to statements for all schemas except the specified schema",
     )
@@ -68,10 +74,7 @@ def parse_args(args):
         default=False,
         help="Force UTF-8 encoding for output",
     )
-    parser.add_argument("dburl_from", help="The database you want to migrate.")
-    parser.add_argument(
-        "dburl_target", help="The database you want to use as the target."
-    )
+    
     return parser.parse_args(args)
 
 

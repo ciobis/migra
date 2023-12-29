@@ -21,7 +21,7 @@ def get_inspector(x, schema=None, exclude_schema=None):
 
     inspected = ic(c)
     if schema:
-        inspected.one_schema(schema)
+        inspected.include_schema(schema)
     elif exclude_schema:
         inspected.exclude_schema(exclude_schema)
     return inspected
