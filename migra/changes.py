@@ -22,6 +22,7 @@ THINGS = [
     "rlspolicies",
     "triggers",
     "roles",
+    "memberships"
 ]
 PK = "PRIMARY KEY"
 
