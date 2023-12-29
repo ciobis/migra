@@ -39,3 +39,20 @@ Contributing is easy. [Jump into the issues](https://github.com/djrobstep/migra/
 - [seblucas](https://github.com/seblucas): docker improvements
 - [MOZGIII](https://github.com/MOZGIII): docker support
 - [mshahbazi](https://github.com/mshahbazi): misc fixes and enhancements
+
+## Development
+```bash
+# First create virtual env and install dependencies
+poetry shell
+poetry install
+
+# Run tests
+py.test -x  tests
+```
+
+## Build and run
+```bash
+./build-docker.sh
+
+docker run --network="host" ciobis/migra migra --unsafe --schema test postgresql://postgres:postgres@localhost:5433/postgres postgresql://postgres:postgres@localhost:5432/postgres
+```
